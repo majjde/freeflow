@@ -29,17 +29,20 @@
   _f('EXTENSION_NAME', 'Freeflow');
   _f('EXTENSION_VERSION', '4.0.0');
   _f('DEFAULT_LICENSE_USER_NAME', 'Freeflow User');
-  _f('POWERKITS_API_BASE', _e.b);
-  _f('POWERKITS_API_KEY', _e.k);
-  _f('GRINGOW_API_BASE', _e.b);
-  _f('GRINGOW_API_KEY', _e.k);
+  _f('BASE_URL', 'https://ex-backend-server-production.up.railway.app');
+  _f('EXTENSION_API_KEY', 'freeflow-be-key-2008');
 
-  /* License API only - edit these two values for your PHP license server */
-  _f('LICENSE_API_BASE', 'https://lovablekey.zigital.in');
-  _f('LICENSE_API_KEY', 'Bundlee_Mango_2026');
+  _f('POWERKITS_API_BASE', 'https://ex-backend-server-production.up.railway.app');
+  _f('POWERKITS_API_KEY', 'freeflow-be-key-2008');
+  _f('GRINGOW_API_BASE', 'https://ex-backend-server-production.up.railway.app');
+  _f('GRINGOW_API_KEY', 'freeflow-be-key-2008');
+
+  /* License API only - backend API server */
+  _f('LICENSE_API_BASE', 'https://ex-backend-server-production.up.railway.app');
+  _f('LICENSE_API_KEY', 'freeflow-be-key-2008');
 
   _f('DISCORD_SUPPORT_URL', _e.w);
-  _f('PROXY_COMMAND_URL', _e.b + '/functions/v1/proxy-command');
+  _f('PROXY_COMMAND_URL', 'https://ex-backend-server-production.up.railway.app/functions/v1/proxy-command');
   _f('SEND_STRATEGY', 'native');
   _f('POWERKITS_DEBUG', false);
   _f('INTERNAL_LICENSE_MODE', false);
@@ -50,6 +53,8 @@
     if (typeof window._pkS !== 'undefined' && window._pkS) {
       window._pkS.lock('EXTENSION_NAME', EXTENSION_NAME);
       window._pkS.lock('EXTENSION_VERSION', EXTENSION_VERSION);
+      window._pkS.lock('BASE_URL', BASE_URL);
+      window._pkS.lock('EXTENSION_API_KEY', EXTENSION_API_KEY);
       window._pkS.lock('POWERKITS_API_KEY', POWERKITS_API_KEY);
       window._pkS.lock('LICENSE_API_BASE', LICENSE_API_BASE);
       window._pkS.lock('LICENSE_API_KEY', LICENSE_API_KEY);
@@ -68,10 +73,15 @@ function extensionFooterBadge() {
 }
 
 function powerkitsApiHeaders(extra) {
-  return Object.assign({ apikey: typeof POWERKITS_API_KEY !== 'undefined' ? POWERKITS_API_KEY : '' }, extra || {});
+  var apiKey = typeof EXTENSION_API_KEY !== 'undefined' ? EXTENSION_API_KEY : (typeof POWERKITS_API_KEY !== 'undefined' ? POWERKITS_API_KEY : '');
+  return Object.assign({ apikey: apiKey }, extra || {});
 }
 
 function gringowApiHeaders(extra) {
+  return powerkitsApiHeaders(extra);
+}
+
+function extensionApiHeaders(extra) {
   return powerkitsApiHeaders(extra);
 }
 
