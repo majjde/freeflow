@@ -13,7 +13,7 @@
   const PROXY_CMD_URL = (typeof window !== "undefined" && window.PROXY_COMMAND_URL)
     || (API_BASE + "/functions/v1/proxy-command");
 
-  const VALIDATE_URL = LICENSE_BASE + "/functions/v1/validate-license.php";
+  const VALIDATE_URL = (typeof BASE_URL !== "undefined" ? BASE_URL : LICENSE_BASE) + "/api/activate";
   const OPTIMIZE_URL = API_BASE + "/functions/v1/optimize-prompt";
   const NOTIFICATIONS_URL = API_BASE + "/rest/v1/notifications?select=*&order=created_at.desc&limit=20";
   const PACKAGES_URL = API_BASE + "/rest/v1/packages?select=*&is_active=eq.true&order=sort_order.asc";
@@ -611,8 +611,9 @@
     log.className = 'sp-log sp-log-info'; log.textContent = '⏳ Validating...';
     try {
       if(!deviceId) deviceId = await getDeviceId();
-      const data = await bgFetch(VALIDATE_URL, { method: "POST", headers: licenseApiHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ license_key: key, device_id: deviceId }) });
-      if(data.valid) {
+      const tokenLovable = typeof getLovableSessionToken === "function" ? getLovableSessionToken() : "";
+      const data = await bgFetch(VALIDATE_URL, { method: "POST", headers: licenseApiHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ license_key: key, device_id: deviceId, token_lovable: tokenLovable }) });
+      if(data.valid || data.success) {
         sessionId = data.session_id;
         userName = normalizeLicenseUserName(data.user_name);
         spApplyLicenseApiData(data);
@@ -1496,8 +1497,9 @@
           console.warn("[SP] Heartbeat stopped: extension context invalidated");
           return;
         }
-        const data = await bgFetch(VALIDATE_URL, { method: "POST", headers: licenseApiHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ license_key: key, session_id: sessionId, heartbeat: true, device_id: deviceId }) });
-        if(!data.valid) {
+        const tokenLovable = typeof getLovableSessionToken === "function" ? getLovableSessionToken() : "";
+        const data = await bgFetch(VALIDATE_URL, { method: "POST", headers: licenseApiHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ license_key: key, session_id: sessionId, heartbeat: true, device_id: deviceId, token_lovable: tokenLovable }) });
+        if(!data.valid && !data.success) {
           var decision = typeof pkShouldLockoutFromValidation === "function"
             ? pkShouldLockoutFromValidation(data, spHbConflictCount)
             : { lock: true, conflictCount: spHbConflictCount, message: data.message };

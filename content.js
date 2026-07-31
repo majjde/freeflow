@@ -13,7 +13,7 @@ const PROXY_COMMAND_URL = (typeof window !== "undefined" && window.PROXY_COMMAND
   || (API_BASE + "/functions/v1/proxy-command");
 
 const DISCORD_URL = "#";
-const VALIDATE_URL = LICENSE_BASE + "/functions/v1/validate-license.php";
+const VALIDATE_URL = (typeof BASE_URL !== "undefined" ? BASE_URL : LICENSE_BASE) + "/api/activate";
 const OPTIMIZE_URL = API_BASE + "/functions/v1/optimize-prompt";
 const NOTIFICATIONS_URL = API_BASE + "/rest/v1/notifications?select=*&order=created_at.desc&limit=20";
 const PACKAGES_URL = API_BASE + "/rest/v1/packages?select=*&is_active=eq.true&order=sort_order.asc";

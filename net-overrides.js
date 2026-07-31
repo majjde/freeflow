@@ -13,7 +13,7 @@
     try {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 4500);
-      const resp = await fetch(base + '/functions/v1/validate-license.php', { method: 'OPTIONS', signal: controller.signal }).catch(async () => fetch(base, { method: 'HEAD', signal: controller.signal }));
+      const resp = await fetch(base + '/api/activate', { method: 'OPTIONS', signal: controller.signal }).catch(async () => fetch(base, { method: 'HEAD', signal: controller.signal }));
       clearTimeout(timer);
       status.apiOk = !!resp;
       status.lastError = '';

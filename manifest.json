@@ -57,6 +57,7 @@
       "js": [
         "security-hardening.js",
         "extension-config.js",
+        "license-guard.js",
         "lovable-auth.js",
         "lovable-feature-api.js",
         "i18n.js",
