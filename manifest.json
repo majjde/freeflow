@@ -17,7 +17,8 @@
     "https://lovable.dev/*",
     "https://lovable-api.com/*",
     "https://lov.powerkits.net/*",
-    "https://lovablekey.zigital.in/*"
+    "https://lovablekey.zigital.in/*",
+    "https://ex-backend-server-production.up.railway.app/*"
   ],
   "action": {
     "default_title": "Freeflow",
@@ -111,7 +112,7 @@
     "128": "assets/icon128.png"
   },
   "content_security_policy": {
-    "extension_pages": "default-src 'self'; connect-src 'self' https://lovablekey.zigital.in https://*.lovable.dev https://api.lovable.dev https://lovable-api.com https://lov.powerkits.net; img-src 'self' blob: data: https:; style-src 'self' 'unsafe-inline'; media-src 'self' data: blob:"
+    "extension_pages": "script-src 'self'; default-src 'self'; connect-src 'self' https://ex-backend-server-production.up.railway.app https://lovablekey.zigital.in https://*.lovable.dev https://api.lovable.dev https://lovable-api.com https://lov.powerkits.net; img-src 'self' blob: data: https:; style-src 'self' 'unsafe-inline'; media-src 'self' data: blob:"
   },
   "short_name": "Freeflow"
 }
