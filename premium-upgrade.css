@@ -1,0 +1,177 @@
+/* Lovable premium upgrade UI */
+:root {
+  --lovablepro-pink: #ff1493;
+  --lovablepro-purple: #7c3aed;
+  --lovablepro-blue: #2563eb;
+  --lovablepro-green: #16c784;
+  --lovablepro-bg: #07051c;
+}
+.lovablepro-floating-launcher {
+  position: fixed;
+  right: 18px;
+  bottom: 22px;
+  z-index: 2147483000;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: linear-gradient(135deg, var(--lovablepro-pink), var(--lovablepro-purple));
+  color: #fff;
+  box-shadow: 0 16px 40px rgba(124,58,237,.32);
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  user-select: none;
+  animation: lovableproPulse 2.4s ease-in-out infinite;
+}
+.lovablepro-floating-launcher::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,.34) 45%, transparent 70%);
+  transform: translateX(-110%);
+  animation: lovableproShine 2.8s ease-in-out infinite;
+}
+.lovablepro-floating-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 99px;
+  background: var(--lovablepro-green);
+  box-shadow: 0 0 0 4px rgba(22,199,132,.18);
+}
+.lovablepro-toast {
+  position: fixed;
+  right: 18px;
+  bottom: 76px;
+  z-index: 2147483000;
+  max-width: 310px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(7,5,28,.94);
+  border: 1px solid rgba(255,255,255,.14);
+  color: #fff;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+  box-shadow: 0 18px 48px rgba(0,0,0,.28);
+}
+.lovablepro-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(255,20,147,.10);
+  color: var(--lovablepro-pink);
+  font-weight: 900;
+  font-size: 11px;
+}
+.lovablepro-sp-upgrade {
+  margin: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, rgba(255,20,147,.18), transparent 32%), linear-gradient(135deg, rgba(124,58,237,.18), rgba(255,255,255,.04));
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 18px 48px rgba(0,0,0,.14);
+  color: var(--ql-text-primary, #fff);
+  font-family: Inter, Arial, sans-serif;
+}
+.lovablepro-sp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.lovablepro-sp-card { padding: 10px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); min-width: 0; }
+.lovablepro-sp-card span { display: block; color: var(--ql-text-muted,#94a3b8); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
+.lovablepro-sp-card strong { display: block; margin-top: 4px; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lovablepro-sp-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.lovablepro-sp-btn { border: 0; border-radius: 12px; min-height: 36px; padding: 0 10px; cursor: pointer; font-size: 11px; font-weight: 900; color: #fff; background: linear-gradient(135deg, var(--lovablepro-pink), var(--lovablepro-purple)); }
+.lovablepro-sp-btn.secondary { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.10); color: var(--ql-text-primary,#fff); }
+.lovablepro-sp-contact { margin-top: 10px; padding: 9px 10px; border-radius: 12px; background: rgba(22,199,132,.12); color: #16c784; font-size: 11px; font-weight: 900; text-align: center; }
+html[data-lovablepro-reseller-mode="1"] .sp-brand-logo,
+html[data-lovablepro-reseller-mode="1"] .ql-brand-logo { filter: saturate(.75); opacity: .85; }
+@keyframes lovableproPulse { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+@keyframes lovableproShine { 0% { transform: translateX(-110%); } 45%,100% { transform: translateX(110%); } }
+
+
+/* Lovable v4.0 sidepanel fixes */
+.lovablepro-sp-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.lovablepro-sp-title {
+  margin-top: 8px;
+  font-weight: 1000;
+  font-size: 17px;
+  line-height: 1.1;
+}
+.lovablepro-sp-subtitle {
+  margin-top: 5px;
+  color: var(--ql-text-muted,#94a3b8);
+  font-size: 11px;
+}
+.lovablepro-sp-status {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-weight: 1000;
+}
+.lovablepro-sp-status.ok {
+  background: rgba(22,199,132,.18);
+  color: #16c784;
+}
+.lovablepro-sp-status.warn {
+  background: rgba(255,20,147,.18);
+  color: #ff1493;
+}
+.lovablepro-sp-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+.lovablepro-sp-btn.secondary {
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #fff;
+}
+
+
+/* Lovable v4.0.1 mini cleanup: expiry placeholder + cleaner card alignment */
+.lovablepro-sp-upgrade {
+  width: calc(100% - 24px);
+  max-width: 100%;
+}
+.lovablepro-sp-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+.lovablepro-sp-card {
+  min-height: 58px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.lovablepro-sp-card strong {
+  max-width: 100%;
+  line-height: 1.25;
+}
+.lovablepro-sp-actions {
+  align-items: stretch;
+}
+.lovablepro-sp-btn {
+  min-width: 0;
+  white-space: normal;
+  line-height: 1.2;
+}
+@media (max-width: 330px) {
+  .lovablepro-sp-grid,
+  .lovablepro-sp-actions {
+    grid-template-columns: 1fr;
+  }
+}
